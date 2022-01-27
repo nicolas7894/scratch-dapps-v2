@@ -1,0 +1,78 @@
+<div class="header py-6">
+</div>
+
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+    <!-- Table -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-header bg-transparent pb-5">
+                    <a routerLink="/home"> <i class="fa-lg fas fa-long-arrow-alt-left"></i></a>
+
+                    <div class="text-center mt-2 mb-4">
+                        <h1>New game</h1>
+                    </div>
+                    <p class="lead"> Set up your game. Your game must be attractive to players but winning for investors.</p>
+                </div>
+                <div class="card-body px-lg-5 py-lg-5">
+                    <form [formGroup]="gameForm" role="form" (ngSubmit)="create()">
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">What is the name of the game ?</label>
+                            <input formControlName="name"  type="text" id="name" class="form-control form-control-alternative" placeholder="My super game">
+                            <span *ngIf="f.name.errors && submited" class="text-danger"> required field </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">How much the player have to spend to play this game ?</label>
+                            <input formControlName="ticketPrice"  type="number" id="ticketPrice" class="form-control form-control-alternative" placeholder="1 AVAX">
+                            <span *ngIf="f.ticketPrice.errors && submited" class="text-danger"> required field </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">Player have to choose a number between 1 and ? (max 45 ) </label>
+                            <input formControlName="rangeNumber"  type="number" id="rangeNumber" class="form-control form-control-alternative" placeholder="45">
+                            <span *ngIf="f.rangeNumber.errors && submited" class="text-danger"> required field </span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">How many numbers player have to choose ? (limit {{ f.rangeNumber.value ? f.rangeNumber.value: '45'}}) </label>
+                            <input formControlName="requiredMatching"  type="number" id="requiredMatching" class="form-control form-control-alternative" placeholder="10">
+                            <span *ngIf="f.requiredMatching.errors && submited" class="text-danger"> required field </span>
+                        </div>
+
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="custom-control custom-control-alternative custom-checkbox">
+                                    <input formControlName="hasFixedPrice" class="custom-control-input"
+                                        id="customCheckRegister" type="checkbox">
+                                    <label class="custom-control-label" for="customCheckRegister">
+                                        <span class="text-muted"> add a fixed prize. The pool can go bigger but the player can only win the max prize (required for 
+                                            reduce the risk of loss)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="f.hasFixedPrice.value" class="form-group">
+                            <label class="form-control-label" for="input-username">What is the max prize ?</label>
+                            <input formControlName="maxPrize"  type="number" id="maxPrize" class="form-control form-control-alternative" placeholder="2">
+                            <span *ngIf="f.maxPrize.errors && submited" class="text-danger"> required field </span>
+                        </div>
+
+                        <div class="text-muted font-italic"><small>Game Odds: 
+                            <span *ngIf="f.requiredMatching.value" class="text-success font-weight-700">1 in {{ getGameOdds() }}</span>
+                        </small></div>
+
+                        <div class="text-center">
+                            <button [disabled]="disabledButton" (click)="create()" type="button" class="btn btn-primary mt-4">
+                                {{ !disabledButton ? 'Create game' : 'loading ...'}}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

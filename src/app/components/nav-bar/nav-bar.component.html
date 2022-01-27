@@ -1,0 +1,17 @@
+<nav class="navbar navbar bg-dark">
+    <a  class="navbar-brand">Scratchy</a>
+    <div class="row">
+        <ul class="nav mb-3">
+            <li class="nav-item">
+              <a  class="nav-link" [routerLink]="['home']">Gamers</a>
+            </li>
+
+            <li  class="nav-item">
+              <a  class="nav-link" [routerLink]="['investors']">Investors</a>
+            </li>
+          </ul>
+    </div>
+    <button *ngIf="!isLoggedIn" (click)="logIn()" class="btn btn-outline-primary my-2 my-sm-0" >log in</button>
+    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-primary my-2 my-sm-0" >log out</button>
+
+</nav>
