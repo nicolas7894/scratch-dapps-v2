@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Choose {{data.game.requiredMatching}} number</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="px-lg-5 py-lg-5">
+                <div>
+                    <div class="form-group">
+                        <div class="row "> 
+                            <div *ngFor="let nb of listNumberForm; let index = index;" class="col-1 col-xs-12"> 
+                                <button (click)="checkNumber(index)" class="btn btn-{{nb.checked ? 'primary': 'secondary'}} rounded">{{ nb.value }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <div class="text-center mb-3">
+        <button [disabled]="disabledButton" (click)="playGame()" type="button" class="btn btn-primary mt-4">
+            {{ !disabledButton ? 'Submit numbers' : 'loading ...'}}
+        </button>
+    </div>
+</mat-dialog-actions>

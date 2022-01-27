@@ -1,53 +1,82 @@
-<div class="row mt-5">
-    <div class="col-1"> </div>
-    <div class="col">
-        <div class="card shadow">
-            <div class="card-header border-0">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h3 class="mb-0">Games</h3>
-                    </div>
-                    <div class="col text-right">
-                        <a routerLink="/new-game" class="btn btn-sm btn-primary">New Game</a>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <!-- Projects table -->
-                <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Liquidity</th>
-                            <th scope="col">Odds</th>
-                            <th scope="col">Max prize</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let game of games">
-                            <th scope="row">
-                                {{ game.name }}
-                            </th>
-                            <td>
-                                {{ game.liquidity }}
-                            </td>
-                            <td>
-                                1 in {{ game.odds }}
-                            </td>
-                            <td>
-                                {{ game.maxPrize ? game.maxPrize : 'no max prize' }}
-                            </td>
-                            <td>
-                                <a *ngIf="game.status != 'pending'"  [routerLink]="['/details-game', game.address]" class="btn btn-sm btn-primary">Details</a>
-                                <a *ngIf="game.status == 'pending'"  class="btn btn-sm btn-light">Game In creation ...</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-1"> </div>
+<section class="container">
+	<div class="row">
+		<div class="col-12 col-md-7 col-lg-9 pl-4 pt-4">
+			<h1 class="title">Scratch Token</h1>
+			<h2 style="color:white">Decentralized scratch off</h2>
+			<span class="connect" style="cursor: pointer;">
+			  	<div class="connect-text">Connect metamask wallet</div>
+			</span>
+		</div>
+		<div class="col-12 col-md-5 col-lg-3 image-shadow-wrapper">
+			<div class="image-shadow" style="--image: url(../../../assets/img/scratchy.png)">
+			</div>
+		</div>
+	</div>
+</section>
 
+<div class="row mt-5">
+	<div class="col">
+		<div class="row align-items-center">
+			<div class="col text-right">
+				<a routerLink="/new-game" class="btn btn-sm btn-primary">New Game</a>
+			</div>
+		</div>
+
+		<div class="container">
+			<!--
+			  <aside class="sidebar is-visible">
+				<p class="sidebar-content"></p>
+			  </aside>
+			-->
+			<div class="content">
+
+				<div class="two-col">
+					<div style="display: flex; flex-direction: column; gap: 16px">
+						<div class="title">Scratch Token</div>
+						<div class="subtitle">Decentralized scratch off</div>
+						<span class="connect" style="cursor: pointer;">
+							  <div class="connect-text">Connect metamask wallet</div>
+							</span>
+					</div>
+					<div class="image-shadow-wrapper">
+						<div class="image-shadow" style="--image: url(../../../assets/img/scratchy.png)">
+						</div>
+					</div>
+				</div>
+
+				<div class="three-col">
+					<div style="display: flex; flex-direction: column;">
+						<div class="image-shadow-wrapper">
+							<div class="image-shadow" style="--image: url(../../../assets/img/metamask.svg)">
+							</div>
+						</div>
+						<span>1. Connect with metamask</span>
+					</div>
+					<div style="display: flex; flex-direction: column;">
+						<img src="../../../assets/img/metamask.svg" alt="metamask">
+						<span>2. Get a ticket</span>
+					</div>
+					<div style="display: flex; flex-direction: column;">
+						<img src="../../../assets/img/metamask.svg" alt="metamask">
+						<span>3. Play! </span>
+					</div>
+				</div>
+				<div class="image-shadow-wrapper">
+					<div class="image-shadow" style="--image: url(../../../assets/img/planet1.png)">
+					</div>
+				</div>
+
+				<div class="image-shadow-wrapper">
+					<div class="image-shadow" style="--image: url(../../../assets/img/planet2.png)">
+					</div>
+				</div>
+
+				<div class="image-shadow-wrapper">
+					<div class="image-shadow" style="--image: url(../../../assets/img/planet3.png)">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
