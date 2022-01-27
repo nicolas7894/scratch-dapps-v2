@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GameService } from 'src/app/services/game.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Game } from 'src/app/models/Game';
+import {ToastrService} from "ngx-toastr";
 
 export interface DialogData {
   game: Game;
@@ -21,7 +22,8 @@ export class DialogPlayGameComponent implements OnInit {
   constructor(
     private dialog:MatDialog,
     private _gameService: GameService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -73,9 +75,11 @@ export class DialogPlayGameComponent implements OnInit {
         numberArr,
         this.data.game.ticketPrice
       );
+      this.toaster.info('Position sent!', 'Game', {  positionClass: 'toast-bottom-right'});
       this.disabledButton = false;
       this.dialog.closeAll();
     } catch (error) {
+      this.toaster.error('An error occurred', 'Error');
       this.disabledButton = false;
     }
   }

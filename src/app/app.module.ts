@@ -13,7 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAddLiquididtyComponent } from './pages/details-game/dialog-add-liquididty/dialog-add-liquididty.component';
 import { DialogPlayGameComponent } from './pages/details-game/dialog-play-game/dialog-play-game.component';
 import { CodeInputModule } from 'angular-code-input';
-import { InvestorsComponent } from './pages/investors/investors.component'; 
+import { InvestorsComponent } from './pages/investors/investors.component';
+import {AddressPipe} from './pipes/address.pipe';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { InvestorsComponent } from './pages/investors/investors.component';
     DialogAddLiquididtyComponent,
     DialogPlayGameComponent,
     InvestorsComponent,
+    AddressPipe
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { InvestorsComponent } from './pages/investors/investors.component';
     AppRoutingModule,
     CodeInputModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

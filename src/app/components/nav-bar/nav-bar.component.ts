@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+
+
 @Component({
   selector: 'nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -7,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavBarComponent implements OnInit {
   public isLoggedIn = false;
-  public user: any;
+  public user;
   constructor(private _userService: UserService) {
     this.initCurrentUser();
   }
@@ -26,6 +28,7 @@ export class NavBarComponent implements OnInit {
   async logOut() {
     this._userService.logOut();
     this.isLoggedIn = false;
+    this.user = null;
   }
 
   ngOnInit(): void {}

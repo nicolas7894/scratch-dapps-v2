@@ -12,6 +12,9 @@
           </ul>
     </div>
     <button *ngIf="!isLoggedIn" (click)="logIn()" class="btn btn-outline-primary my-2 my-sm-0" >log in</button>
-    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-primary my-2 my-sm-0" >log out</button>
+    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-primary my-2 my-sm-0" >
+      log out <br />
+      <span class="small">{{ user.get('ethAddress') | address }}</span>
+    </button>
 
 </nav>
