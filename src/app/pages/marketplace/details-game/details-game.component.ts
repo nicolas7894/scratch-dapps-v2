@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddLiquididtyComponent } from 'src/app/pages/marketplace/details-game/dialog-add-liquididty/dialog-add-liquididty.component';
 import { environment } from 'src/environments/environment';
 import { DialogPlayGameComponent } from 'src/app/pages/marketplace/details-game/dialog-play-game/dialog-play-game.component';
+import {EventService} from "../../services/event.service";
 
 declare var Moralis;
 Moralis.start({
@@ -27,10 +28,15 @@ export class DetailsGameComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _gameService: GameService,
+    private _eventService: EventService,
     private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
+    this._eventService.liquidityChange$.subscribe(async (event: { smartContractAddress: string }) => {
+      console.log(event);
+      if (this.gameAddress === event.smartContractAddress) this.liquidity = await this._gameService.getLiquidity(event.smartContractAddress);
+    });
     this.gameAddress = this.route.snapshot.paramMap.get('address');
     this.getGameDetails();
     this.getGameTransactions();

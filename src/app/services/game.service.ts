@@ -59,8 +59,9 @@ export class GameService {
       abi: ScratchAbi.abi,
       msgValue: Moralis.Units.ETH(quantity.toString()),
     };
-    this.handleLiquidityAdded(scratcherAddress, quantity);
+    await this.handleLiquidityAdded(scratcherAddress, quantity);
     await Moralis.executeFunction(sendOptions);
+    await this._eventService.liquidityAdded(scratcherAddress);
   }
 
   async removeLiquidity(scratcherAddress: string, quantity: number) {
@@ -90,7 +91,6 @@ export class GameService {
     selectedNumber: Array<any>,
     ticketPrice
   ) {
-    console.log(scratcherAddress);
     await Moralis.enableWeb3();
     const sendOptions = {
       contractAddress: scratcherAddress,
@@ -100,7 +100,7 @@ export class GameService {
       abi: ScratchAbi.abi,
     };
     await Moralis.executeFunction(sendOptions);
-    this._eventService.drawn(scratcherAddress);
+    await this._eventService.drawn(scratcherAddress);
   }
 
   async getOne(address: string) {
@@ -128,7 +128,9 @@ export class GameService {
     const query = new Moralis.Query(MGame);
     query.equalTo('address', address);
     const results = await query.find();
-    results[0].set('liquididty', quantity);
+    console.log(results[0].attributes.liquidity);
+    console.log(quantity);
+    results[0].set('liquidity', results[0].attributes.liquidity + quantity);
     results[0].save();
   }
 

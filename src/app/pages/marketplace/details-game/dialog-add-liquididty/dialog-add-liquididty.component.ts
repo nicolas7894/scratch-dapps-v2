@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GameService } from 'src/app/services/game.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {ToastrService} from "ngx-toastr";
 
 export interface DialogData {
   address: string;
@@ -18,8 +19,10 @@ export class DialogAddLiquididtyComponent implements OnInit {
   sharePool: number = 0;
 
   constructor(
+    private dialog:MatDialog,
     private fb: FormBuilder,
     private _gameService: GameService,
+    private toastr: ToastrService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
@@ -61,8 +64,11 @@ export class DialogAddLiquididtyComponent implements OnInit {
         this.data.address,
         this.f.quantity.value
       );
+      this.toastr.info('Deposit in progress!', 'Liquidity', {  positionClass: 'toast-bottom-right'});
       this.disabledButton = false;
+      this.dialog.closeAll();
     } catch (error) {
+      this.toastr.error('An error occurred!', 'Error', {  positionClass: 'toast-bottom-right'});
       this.disabledButton = false;
     }
   }
