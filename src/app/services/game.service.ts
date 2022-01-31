@@ -17,7 +17,7 @@ Moralis.start({
   providedIn: 'root',
 })
 export class GameService {
-  factoryAddress = '0x0f4905aF6B0621149A7901092515F26db7Cb30CB';
+  factoryAddress = '0x055158B128f8CF9867eaFd113EeCd6ab2E9a80cA';
   zeroAddress = '0x0000000000000000000000000000000000000000';
   constructor(
     private _eventService: EventService,
@@ -41,6 +41,7 @@ export class GameService {
         _maxPrize: gamePayload.maxPrize,
         _requiredMatching: gamePayload.requiredMatching,
         _listNumber: gamePayload.listNumber,
+        _mode: "1"
       },
     };
     await Moralis.executeFunction(sendOptions);

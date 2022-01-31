@@ -54,6 +54,11 @@ export const FactoryAbi = {
           name: '_listNumber',
           type: 'uint256[]',
         },
+        {
+          internalType: 'string',
+          name: '_mode',
+          type: 'string',
+        },
       ],
       name: 'createGame',
       outputs: [
