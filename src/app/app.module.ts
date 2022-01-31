@@ -15,6 +15,8 @@ import { DialogPlayGameComponent } from './pages/details-game/dialog-play-game/d
 import { CodeInputModule } from 'angular-code-input';
 import { InvestorsComponent } from './pages/investors/investors.component';
 import { DialogRemoveLiquidityComponent } from './pages/investors/dialog-remove-liquidity/dialog-remove-liquidity.component'; 
+import {AddressPipe} from './pipes/address.pipe';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { DialogRemoveLiquidityComponent } from './pages/investors/dialog-remove-
     DialogPlayGameComponent,
     InvestorsComponent,
     DialogRemoveLiquidityComponent,
+    AddressPipe
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { DialogRemoveLiquidityComponent } from './pages/investors/dialog-remove-
     AppRoutingModule,
     CodeInputModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

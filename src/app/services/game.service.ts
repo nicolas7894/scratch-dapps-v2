@@ -64,7 +64,12 @@ export class GameService {
       abi: ScratchAbi.abi,
       msgValue: Moralis.Units.ETH(quantity.toString()),
     };
+<<<<<<< HEAD
+=======
+    await this.handleLiquidityAdded(scratcherAddress, quantity);
+>>>>>>> 0f7562d5b1e3a76462f63af48c7e72313ce191ce
     await Moralis.executeFunction(sendOptions);
+    await this._eventService.liquidityAdded(scratcherAddress);
   }
 
   async removeLiquidity(scratcherAddress: string, quantity: number) {
@@ -102,7 +107,7 @@ export class GameService {
       abi: ScratchAbi.abi,
     };
     await Moralis.executeFunction(sendOptions);
-    this._eventService.drawn(scratcherAddress);
+    await this._eventService.drawn(scratcherAddress);
   }
 
   async getOne(address: string) {
@@ -128,7 +133,6 @@ export class GameService {
   async getTransactionLiquididty(filter: any) {
     return await Moralis.Cloud.run('getPositions', filter);
   }
-
 
   async handleCreation(game) {
     let query = new Moralis.Query('ECreateGame');

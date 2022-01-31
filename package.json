@@ -24,6 +24,7 @@
     "angular-code-input": "^1.6.0",
     "bootstrap": "4.5.2",
     "ethers": "^5.5.3",
+    "ngx-toastr": "^10.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
