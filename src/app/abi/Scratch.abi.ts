@@ -35,6 +35,11 @@ export const ScratchAbi = {
           name: '_listNumber',
           type: 'uint256[]',
         },
+        {
+          internalType: 'string',
+          name: '_mode',
+          type: 'string',
+        },
       ],
       stateMutability: 'nonpayable',
       type: 'constructor',
@@ -94,6 +99,19 @@ export const ScratchAbi = {
         },
       ],
       name: 'LiquidityAdded',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: false,
+          internalType: 'uint256',
+          name: 'quantity',
+          type: 'uint256',
+        },
+      ],
+      name: 'LiquidityRemoved',
       type: 'event',
     },
     {
@@ -396,6 +414,19 @@ export const ScratchAbi = {
           internalType: 'uint256',
           name: '',
           type: 'uint256',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'mode',
+      outputs: [
+        {
+          internalType: 'string',
+          name: '',
+          type: 'string',
         },
       ],
       stateMutability: 'view',
