@@ -64,10 +64,6 @@ export class GameService {
       abi: ScratchAbi.abi,
       msgValue: Moralis.Units.ETH(quantity.toString()),
     };
-<<<<<<< HEAD
-=======
-    await this.handleLiquidityAdded(scratcherAddress, quantity);
->>>>>>> 0f7562d5b1e3a76462f63af48c7e72313ce191ce
     await Moralis.executeFunction(sendOptions);
     await this._eventService.liquidityAdded(scratcherAddress);
   }
