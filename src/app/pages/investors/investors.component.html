@@ -15,7 +15,7 @@
                     <div class="col-6 text-right">
                         <a (click)="openRemoveLiquidity(ps.tokenAddress)" class="btn btn-sm btn-success">Withdraw</a>
 
-                        <a routerLink="/new-game" class="btn btn-sm btn-primary">Add liquididty</a>
+                        <a [routerLink]="['/details-game', ps.tokenAddress]" class="btn btn-sm btn-primary">Game</a>
                     </div>
                 </div>
                 <div class="row align-items-center">
