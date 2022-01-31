@@ -118,14 +118,13 @@ export class GameService {
   }
 
   async getLiquidity(scratcherAddress) {
-    if(!await Moralis.isWeb3Enabled()) await Moralis.enableWeb3();
     const sendOptions = {
       contractAddress: scratcherAddress,
       functionName: 'getReserve',
       abi: ScratchAbi.abi,
     };
     const reserve = Moralis.Units.FromWei(await Moralis.executeFunction(sendOptions));
-    return reserve
+    return reserve;
   }
 
   async getTransactionLiquididty(filter: any) {
