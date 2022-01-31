@@ -34,6 +34,7 @@ export class DetailsGameComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    await Moralis.enableWeb3();
     this._eventService.liquidityChange$.subscribe(async (event: { smartContractAddress: string }) => {
       if (this.gameAddress === event.smartContractAddress) {
         this.liquidity = await this._gameService.getLiquidity(event.smartContractAddress);

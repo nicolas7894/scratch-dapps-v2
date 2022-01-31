@@ -19,24 +19,28 @@ export class HomeComponent implements OnInit {
 
   constructor(private _gameService: GameService) {}
 
-  ngOnInit(): void {
-    this.getGameList();
-    this.listenChange();
+  async ngOnInit(): Promise<void> {
+    await Moralis.enableWeb3();
+    await this.getGameList();
+    await this.listenChange();
   }
 
   async listenChange() {
     let query = new Moralis.Query('ECreateGame');
     let subscription = await query.subscribe();
     subscription.on('update', async () => {
-      this.getGameList();
+      await this.getGameList();
     });
   }
 
-  getLiquidity(gameAddress) {
-    return this._gameService.getLiquidity(gameAddress)
+  async getliquidity(gameAddress) {
+    return this._gameService.getLiquidity(gameAddress);
   }
 
   async getGameList() {
     this.games = await this._gameService.get();
+    this.games.map(async g => {
+      g.liquidity = await this.getliquidity(g.address);
+    });
   }
 }

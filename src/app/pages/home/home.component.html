@@ -1,7 +1,7 @@
 <div class="container pt-5">
   <div class="row">
     <div class="col-12 col-sm-12 col-md-6 pb-5" style="display:flex; align-items:center" *ngFor="let game of games">
-      <app-card-game></app-card-game>
+      <app-card-game [routerLink]="['/details-game', game.address]" style="cursor: pointer;"></app-card-game>
       <div style="width: 100%; cursor:pointer" [routerLink]="['/details-game', game.address]">
         <div class="card card-stats mb-4 mb-lg-0 pl-3">
           <div class="card-body">
