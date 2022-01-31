@@ -14,9 +14,11 @@ import { DialogAddLiquididtyComponent } from './pages/details-game/dialog-add-li
 import { DialogPlayGameComponent } from './pages/details-game/dialog-play-game/dialog-play-game.component';
 import { CodeInputModule } from 'angular-code-input';
 import { InvestorsComponent } from './pages/investors/investors.component';
-import { DialogRemoveLiquidityComponent } from './pages/investors/dialog-remove-liquidity/dialog-remove-liquidity.component'; 
+import { DialogRemoveLiquidityComponent } from './pages/investors/dialog-remove-liquidity/dialog-remove-liquidity.component';
 import {AddressPipe} from './pipes/address.pipe';
 import {ToastrModule} from 'ngx-toastr';
+import { CardGameComponent } from './components/card-game/card-game.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {ToastrModule} from 'ngx-toastr';
     DialogPlayGameComponent,
     InvestorsComponent,
     DialogRemoveLiquidityComponent,
-    AddressPipe
+    AddressPipe,
+    CardGameComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
-<nav class="navbar navbar bg-dark">
-    <a  class="navbar-brand">Scratchy</a>
+<nav class="navbar">
+    <a  class="navbar-brand" [routerLink]="['landing']">Scratchy</a>
     <div class="row">
-        <ul class="nav mb-3">
+        <ul class="nav">
             <li class="nav-item">
               <a  class="nav-link" [routerLink]="['home']">Gamers</a>
             </li>
@@ -9,12 +9,16 @@
             <li  class="nav-item">
               <a  class="nav-link" [routerLink]="['investors']">Investors</a>
             </li>
+            <li  class="nav-item">
+              <a routerLink="/new-game" class="btn btn-sm btn-primary">New Game</a>
+            </li>
           </ul>
     </div>
-    <button *ngIf="!isLoggedIn" (click)="logIn()" class="btn btn-outline-primary my-2 my-sm-0" >log in</button>
-    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-primary my-2 my-sm-0" >
-      log out <br />
-      <span class="small">{{ user.get('ethAddress') | address }}</span>
+  <div style="float:right">
+    <span class="small mr-3">{{ user.get('ethAddress') | address }}</span>
+    <button *ngIf="!isLoggedIn" (click)="logIn()" class="btn btn-danger my-2 my-sm-0" >log in</button>
+    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-danger my-2 my-sm-0" >
+      log out
     </button>
-
+  </div>
 </nav>

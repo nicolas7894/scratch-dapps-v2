@@ -1,111 +1,105 @@
 <div class="header py-6">
 </div>
 
-<div *ngIf="game" class="container-fluid mt--7">
-    <div class="row">
-        <div class="col-6 text-left">
-            <a routerLink="/home"> <i class="fa-lg fas fa-long-arrow-alt-left"></i></a>
-
-        </div>
+<div *ngIf="game" class="container mt--7">
+  <div class="row">
+    <div class="col-6 text-left pb-2">
+      <a routerLink="/home"> <i class="fa-lg fas fa-long-arrow-alt-left"></i> Retour</a>
     </div>
-    <div class="row mb-3">
-        <div class="col-6 text-left">
-            <h1> {{ game.name }}</h1>
-        </div>
-        <div class="col-6 text-right">
-            <a (click)="openModalAddLiquidity()" class="btn btn-sm btn-outline-success">Add liquidity</a>
-            <a (click)="openModalPlayGame()" class="btn btn-sm btn-primary">Play game</a>
-        </div>
+    <div class="col-12" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center">
+
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card bg-secondary shadow">
-                <div class="card-header bg-white border-0">
-                    <div class="row align-items-center mb-2">
-                        <div class="col-8">
-                            <h3 class="mb-0">Ticket price</h3>
-                        </div>
-                        <div class="col-4">
-                            <span class="mb-0">{{ game.ticketPrice }}</span>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-2">
-                        <div class="col-8">
-                            <h3 class="mb-0">Number to draw </h3>
-                        </div>
-                        <div class="col-4">
-                            <span class="mb-0">{{ game.requiredMatching }}</span>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-2">
-                        <div class="col-8">
-                            <h3 class="mb-0">Max prize</h3>
-                        </div>
-                        <div class="col-4">
-                            <span *ngIf="game.maxPrize" class="mb-0">{{ game.maxPrize }}</span>
-                            <span *ngIf="!game.maxPrize" class="mb-0">No max prize</span>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-2">
-                        <div class="col-8">
-                            <h3 class="mb-0">Prize</h3>
-                        </div>
-                        <div *ngIf="liquidity" class="col-4">
-                            <span class="mb-0"> {{ liquidity }}</span>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-2">
-                        <div class="col-8">
-                            <h3 class="mb-0">Odds</h3>
-                        </div>
-                        <div class="col-4">
-                            <span class="mb-0"> 1 in {{ game.odds }}</span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card-body">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8">
-
-            <div class="card shadow">
-                <div class="card-header bg-white border-0">
-                    <div class="row align-items-center">
-                        <div class="col-8">
-                            <h3 class="mb-0">Last transactions</h3>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="table-responsive">
-                    <!-- Projects table -->
-                    <table class="table align-items-center table-flush">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">winning number</th>
-                                <th scope="col">Number submited</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let tr of gameTransactions">
-                                <td [class.winner-row]="tr.isRowWinner">
-                                    {{ tr.createdAt | date : 'mediumDate' }}
-                                </td>
-                                <td [class.winner-row]="tr.isRowWinner">
-                                    {{ tr.winningNumber }}
-                                </td>
-                                <td [class.winner-row]="tr.isRowWinner">
-                                    {{ tr.playerNumbers }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
+  </div>
+  <div class="row">
+    <div class="pb-3 col-md-6" style="display:flex; justify-content:center">
+      <app-card-game></app-card-game>
     </div>
+    <div class="col-md-6 mt-5">
+      <h1 class="title"> {{ game.name }}</h1>
+      <div class="actions">
+        <div>
+          <h3>Ticket price</h3>
+          {{ game.ticketPrice }} AVAX
+        </div>
+        <div style="display:flex; flex-direction: row;">
+					<span (click)="openModalAddLiquidity()" class="liquidity ml-3" style="cursor: pointer;">
+						<div class="connect-text">Add liquidity</div>
+					</span>
+          <span (click)="openModalPlayGame()" class="game ml-3" style="cursor: pointer;">
+						<div class="connect-text">Play game</div>
+					</span>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction: column; gap: 14px; margin-top: 24px">
+        <div class="line-info">
+          <span>Max Prize</span>
+          <hr />
+          <b *ngIf="game.maxPrize">{{ game.maxPrize }}</b>
+          <b *ngIf="!game.maxPrize">No max prize</b>
+        </div>
+        <div class="line-info">
+          <span>Liquidity</span>
+          <hr />
+          <b>{{ game.liquidity }}</b>
+        </div>
+        <div class="line-info">
+          <span>Odds</span>
+          <hr />
+          <b>1 in {{ game.odds }}</b>
+        </div>
+        <div class="line-info">
+          <span>Required Matching</span>
+          <hr />
+          <b>{{ game.requiredMatching }}</b>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-12 mt-6 mb-6">
+      <div *ngIf="gameTransactions; else noTransactions" class="card shadow">
+        <div class="row align-items-center">
+          <div class="col-8">
+            <h3 class="mb-2 mt-3 ml-4" style="color:white">Last transactions</h3>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush" style="border-radius:30px">
+            <thead>
+            <tr>
+              <th></th>
+              <th scope="col">Date</th>
+              <th scope="col">Winning number</th>
+              <th scope="col">Number submited</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let tr of gameTransactions">
+              <td *ngIf="tr.isRowWinner" class="winner-row">
+
+              </td>
+              <td *ngIf="!tr.isRowWinner" class="lose-row">
+
+              </td>
+              <td>
+                {{ tr.createdAt | date : 'mediumDate' }}
+              </td>
+              <td>
+                {{ tr.winningNumber }}
+              </td>
+              <td>
+                {{ tr.playerNumbers }}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<ng-template id="noTransactions">
+  <p>No transaction found</p>
+</ng-template>

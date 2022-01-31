@@ -1,0 +1,15 @@
+@font-face {
+    font-family: Audiowide;
+    src: url("../assets/fonts/Audiowide-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+::ng-deep mat-dialog-container {
+   background-color: #50255F !important;
+   color: white !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white !important;
+}

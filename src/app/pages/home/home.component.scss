@@ -1,0 +1,53 @@
+
+
+.chart {
+  height: unset;
+}
+
+#chart {
+  width: 100%;
+}
+
+.card {
+  background: rgba(196, 196, 196, 0.2);
+  backdrop-filter: blur(16px);
+  border-radius: 30px;
+  z-index:1;
+  color: white;
+}
+
+* {
+  color: white;
+}
+
+$bg: #252429;
+
+html,body{height:100%;}body{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;background:$bg;}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+	padding: 20px;
+}
+
+.line-chart {
+	animation: fadeIn 600ms cubic-bezier(.57,.25,.65,1) 1 forwards;
+  opacity: 0;
+	max-width: 640px;
+	width: 100%;
+}
+
+.aspect-ratio {
+  height: 0;
+  padding-bottom: 50%; // 495h / 990w
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

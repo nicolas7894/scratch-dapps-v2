@@ -1,0 +1,45 @@
+.game-card {
+	background: var(--image) no-repeat center;
+	backface-visibility: hidden;
+	background-size: cover;
+	background-position-x: center;
+	border-radius: 8px;
+	border: solid 1px #FAC131;
+	height:250px;
+	width:200px;
+	margin-right: -18px;
+	position:relative;
+	z-index:2;
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	align-items: center;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 1%;
+		left: 0.5%;
+		width: 100%;
+		height: 100%;
+		transform: scale(1.2);
+		transform-origin: center;
+		background: var(--image) no-repeat center;
+		z-index: -1;
+		opacity: .4;
+		filter: blur(100px);
+	}
+
+	& > img {
+		padding-top: 5%;
+		padding-bottom: 5%;
+		justify-content: center;
+	}
+
+	& > .selector {
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.5);
+		border-radius: 8px;
+	}
+}
