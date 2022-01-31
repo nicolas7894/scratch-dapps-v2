@@ -1,4 +1,4 @@
-<div class="row mt-5">
+<div *ngIf='positions' class="row mt-5">
     <div class="col-1"> </div>
     <div class="col">
         <div class="row align-items-center">
@@ -6,26 +6,32 @@
                 <h3 class="mb-3">Your positions</h3>
             </div>
         </div>
-        <div class="card shadow mb-4">
+        <div *ngFor="let ps of positions; let index = index" class="card shadow mb-4">
             <div class="card-header border-0">
                 <div class="row align-items-center">
-                    <div class="col">
-                        <h3 class="mb-0">Games</h3>
+                    <div class="col-6">
+                        <h3 class="mb-0">{{ ps.gameName }}</h3>
                     </div>
-                    <div class="col text-right">
-                        <a routerLink="/new-game" class="btn btn-sm btn-primary">New Game</a>
+                    <div class="col-6 text-right">
+                        <a (click)="openRemoveLiquidity(ps.gameAddress)" routerLink="/new-game" class="btn btn-sm btn-success">Remove liquidity</a>
+
+                        <a routerLink="/new-game" class="btn btn-sm btn-primary">Add liquididty</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header border-0">
                 <div class="row align-items-center">
-                    <div class="col">
-                        <h3 class="mb-0">Games</h3>
-                    </div>
-                    <div class="col text-right">
-                        <a routerLink="/new-game" class="btn btn-sm btn-primary">New Game</a>
+                    <div class="col-6">
+                        <span>Liquididty added : {{ ps.balance }}  </span>
+                        <br>
+                        <span>Estimated reward : {{ ps.estimatedReward?.toFixed(2) }}</span>
+                        <br>
+                        <span *ngIf="ps.percentageChange >= 0"class="text-success mr-2">
+                            <i  class="fas fa-arrow-up"></i> 
+                            {{ ps.percentageChange?.toFixed(2) }}%</span>
+                            <span *ngIf="ps.percentageChange < 0" class="text-warning mr-2">
+                                <i  class="fas fa-arrow-down"></i> 
+                                {{ ps.percentageChange?.toFixed(2) }}%</span>
+
+                        
                     </div>
                 </div>
             </div>

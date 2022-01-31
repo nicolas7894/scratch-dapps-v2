@@ -38,6 +38,5 @@ export class HomeComponent implements OnInit {
 
   async getGameList() {
     this.games = await this._gameService.get();
-    console.log(this.games)
   }
 }

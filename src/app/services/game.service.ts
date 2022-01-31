@@ -5,20 +5,25 @@ import { environment } from './../../environments/environment';
 import { FactoryAbi } from 'src/app/abi/Factory.abi';
 import { ScratchAbi } from 'src/app/abi/Scratch.abi';
 import { EventService } from 'src/app/services/event.service';
+import { UserService } from 'src/app/services/user.service';
+import { NetWorkService } from 'src/app/services/network.service';
 
 declare var Moralis;
 Moralis.start({
   serverUrl: environment.server_url,
   appId: environment.app_id,
-  masterKey: environment.masterKey,
 });
 @Injectable({
   providedIn: 'root',
 })
 export class GameService {
-  factoryAddress = '0x886e7695d5f3DE7547E32Bb4EE324bF7291BCCaF';
+  factoryAddress = '0xBf54D8747009dFDEfB88DD20E919b2e6862Eb3d6';
   zeroAddress = '0x0000000000000000000000000000000000000000';
-  constructor(private _eventService: EventService) {}
+  constructor(
+    private _eventService: EventService,
+    private _netWorkService: NetWorkService
+  ) {
+  }
 
   async create(gamePayload: Game) {
     await Moralis.enableWeb3();
@@ -59,7 +64,6 @@ export class GameService {
       abi: ScratchAbi.abi,
       msgValue: Moralis.Units.ETH(quantity.toString()),
     };
-    this.handleLiquidityAdded(scratcherAddress, quantity);
     await Moralis.executeFunction(sendOptions);
   }
 
@@ -71,7 +75,6 @@ export class GameService {
       params: { _amount: quantity },
       abi: ScratchAbi.abi,
     };
-    // this.handleLiquidityAdded(scratcherAddress, quantity);
     await Moralis.executeFunction(sendOptions);
   }
 
@@ -82,7 +85,7 @@ export class GameService {
       functionName: 'totalSupply',
       abi: ScratchAbi.abi,
     };
-    return await Moralis.executeFunction(sendOptions);
+    return Moralis.Units.FromWei(await Moralis.executeFunction(sendOptions));
   }
 
   async playGame(
@@ -90,7 +93,6 @@ export class GameService {
     selectedNumber: Array<any>,
     ticketPrice
   ) {
-    console.log(scratcherAddress);
     await Moralis.enableWeb3();
     const sendOptions = {
       contractAddress: scratcherAddress,
@@ -113,24 +115,20 @@ export class GameService {
   }
 
   async getLiquidity(scratcherAddress) {
-    await Moralis.enableWeb3();
+    if(!await Moralis.isWeb3Enabled()) await Moralis.enableWeb3();
     const sendOptions = {
       contractAddress: scratcherAddress,
       functionName: 'getReserve',
       abi: ScratchAbi.abi,
     };
-
-    return Moralis.Units.FromWei(await Moralis.executeFunction(sendOptions));
+    const reserve = Moralis.Units.FromWei(await Moralis.executeFunction(sendOptions));
+    return reserve
   }
 
-  async handleLiquidityAdded(address, quantity) {
-    const MGame = Moralis.Object.extend('Game');
-    const query = new Moralis.Query(MGame);
-    query.equalTo('address', address);
-    const results = await query.find();
-    results[0].set('liquididty', quantity);
-    results[0].save();
+  async getTransactionLiquididty(filter: any) {
+    return await Moralis.Cloud.run('getPositions', filter);
   }
+
 
   async handleCreation(game) {
     let query = new Moralis.Query('ECreateGame');
@@ -142,14 +140,55 @@ export class GameService {
     });
   }
 
-  async getTransactions(filter: any) {
-    const MGame = Moralis.Object.extend('GameTransaction');
-    const query = new Moralis.Query(MGame);
-    if (filter.gameContractAddress) {
-      query.equalTo('gameContractAddress', filter.gameContractAddress);
-    }
-    const results = await query.find();
-    if (!results.length) return;
-    return results.map((result) => new GameTransaction(result.attributes));
+  async getDrawnTransactions(contractAddress) {
+    const options = {
+      chain: '0xa869',
+      address: contractAddress,
+      topic:
+        '0xce870b5a6ec6a9d611c9b988a73379847061a65e3551b6070420405c3189e5f6',
+      abi: {
+        anonymous: false,
+        inputs: [
+          {
+            indexed: false,
+            internalType: 'uint256[]',
+            name: 'playerNumbers',
+            type: 'uint256[]',
+          },
+          {
+            indexed: false,
+            internalType: 'uint256[]',
+            name: '_randomNumber',
+            type: 'uint256[]',
+          },
+        ],
+        name: 'Drawn',
+        type: 'event',
+      },
+    };
+    const results = await Moralis.Web3API.native.getContractEvents(options);
+    console.log(results);
+    return results.result.map((result) => new GameTransaction(result));
+
+  }
+
+  async getAllPosition() {
+    const positions = [];
+    const erc20Tokens = await Moralis.Web3.getAllERC20({
+      chain: await this._netWorkService.getName(),
+    });
+    await Promise.all(
+      await erc20Tokens.map(async (token) => {
+        if (token.symbol == 'SCR') {
+          const game = await this.getOne(token.tokenAddress);
+          if (game) {
+            token.balance = Moralis.Units.FromWei(token.balance);
+            token.gameName = game.name;
+            positions.push(token);
+          }
+        }
+      })
+    );
+    return positions;
   }
 }

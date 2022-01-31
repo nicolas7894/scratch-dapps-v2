@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/models/Game';
+import { GameTransaction } from 'src/app/models/GameTransaction';
 import { GameService } from 'src/app/services/game.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddLiquididtyComponent } from 'src/app/pages/details-game/dialog-add-liquididty/dialog-add-liquididty.component';
@@ -21,7 +22,7 @@ Moralis.start({
 })
 export class DetailsGameComponent implements OnInit {
   gameAddress: string;
-  gameTransactions: Array<any>;
+  gameTransactions: Array<GameTransaction>;
   game: Game;
   liquidity: number;
   constructor(
@@ -30,13 +31,11 @@ export class DetailsGameComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.gameAddress = this.route.snapshot.paramMap.get('address');
-    this.getGameDetails();
-    this.getGameTransactions();
-    this.getGameLiquidity();
-    this.listenGameChange();
-    this.listenGameTransactionChange();
+    await this.getGameTransactions();
+    await this.getGameDetails();
+    await this.getGameLiquidity();
   }
 
   async getGameDetails() {
@@ -45,27 +44,6 @@ export class DetailsGameComponent implements OnInit {
 
   async getGameLiquidity() {
     this.liquidity = await this._gameService.getLiquidity(this.gameAddress);
-  }
-
-  async getGameTransactions() {
-    const filter = { gameContractAddress: this.gameAddress };
-    this.gameTransactions = await this._gameService.getTransactions(filter);
-  }
-
-  async listenGameChange() {
-    let query = new Moralis.Query('Game');
-    let subscription = await query.subscribe();
-    subscription.on('update', async () => {
-      this.getGameDetails();
-    });
-  }
-
-  async listenGameTransactionChange() {
-    let query = new Moralis.Query('GameTransaction');
-    let subscription = await query.subscribe();
-    subscription.on('create', async () => {
-      this.getGameTransactions();
-    });
   }
 
   openModalAddLiquidity() {
@@ -88,5 +66,9 @@ export class DetailsGameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+  }
+
+  async getGameTransactions() {
+    this.gameTransactions = await this._gameService.getDrawnTransactions(this.gameAddress); 
   }
 }

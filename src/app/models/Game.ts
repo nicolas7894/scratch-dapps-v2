@@ -1,5 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
 export class Game {
   status: string;
   name: string;

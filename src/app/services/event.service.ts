@@ -28,17 +28,6 @@ export class EventService {
     );
 
     contract.on('Drawn', async (playerNumbers, winningNumber, listener) => {
-      const user = await this._userService.getCurrentUser();
-      const transaction = new GameTransaction({
-        playerNumbers: playerNumbers.map((value) => value.toString()),
-        gameContractAddress: smartContractAddress,
-        winningNumber: winningNumber.map((value) => value.toString()),
-        transactionHash: listener.transactionHash,
-        playerAddress: user.get('ethAddress'),
-      });
-      const Mtransaction = Moralis.Object.extend('GameTransaction');
-      const mtransaction = new Mtransaction(transaction);
-      await mtransaction.save();
       listener.removeListener();
     });
   }

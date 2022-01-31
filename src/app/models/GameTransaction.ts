@@ -1,18 +1,16 @@
 export class GameTransaction {
+  transactionHash: string;
   playerNumbers: Array<number>;
   createdAt: Date;
   winningNumber: Array<number>;
-  transactionHash: string;
-  playerAddress: string;
   gameContractAddress: string;
 
   constructor(transaction) {
-    this.createdAt = transaction.createdAt;
-    this.playerNumbers = transaction.playerNumbers;
-    this.playerAddress = transaction.playerAddress;
-    this.winningNumber = transaction.winningNumber;
-    this.transactionHash = transaction.transactionHash;
-    this.gameContractAddress = transaction.gameContractAddress;
+    this.createdAt = transaction.block_timestamp;
+    this.playerNumbers = transaction.data.playerNumbers;
+    this.winningNumber = transaction.data._randomNumber;
+    this.transactionHash = transaction.transaction_hash;
+    this.gameContractAddress = transaction.address;
   }
 
   get isRowWinner() {
