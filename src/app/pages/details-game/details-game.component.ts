@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddLiquididtyComponent } from 'src/app/pages/details-game/dialog-add-liquididty/dialog-add-liquididty.component';
 import { environment } from 'src/environments/environment';
 import { DialogPlayGameComponent } from 'src/app/pages/details-game/dialog-play-game/dialog-play-game.component';
-import {EventService} from "../../services/event.service";
+import {EventService} from '../../services/event.service';
 
 declare var Moralis;
 Moralis.start({
@@ -76,6 +76,6 @@ export class DetailsGameComponent implements OnInit {
   }
 
   async getGameTransactions() {
-    this.gameTransactions = await this._gameService.getDrawnTransactions(this.gameAddress); 
+    this.gameTransactions = await this._gameService.getDrawnTransactions(this.gameAddress);
   }
 }

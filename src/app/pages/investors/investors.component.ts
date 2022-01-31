@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogRemoveLiquidityComponent } from 'src/app/pages/investors/dialog-remove-liquidity/dialog-remove-liquidity.component'
+import {EventService} from "../../services/event.service";
 
 @Component({
   selector: 'app-investors',
@@ -13,12 +14,16 @@ export class InvestorsComponent implements OnInit {
 
   constructor(
     private _gameService: GameService,
+    private _eventService: EventService,
     private dialog: MatDialog,
   ) {}
 
   async ngOnInit() {
     await this.getAllPosition();
     await this.calculateEstimatedReward();
+    this._eventService.liquidityChange$.subscribe(async address => {
+      await this.getAllPosition();
+    });
   }
 
   async calculateEstimatedReward() {
@@ -32,6 +37,7 @@ export class InvestorsComponent implements OnInit {
   }
 
   openRemoveLiquidity(gameAddress) {
+    console.log(gameAddress);
     const dialogRef = this.dialog.open(DialogRemoveLiquidityComponent, {
       data: { address: gameAddress },
     });

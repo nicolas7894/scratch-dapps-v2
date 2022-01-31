@@ -63,4 +63,18 @@ export class EventService {
       this.toaster.success('Adding confirmed!', 'Liquidity', {positionClass: 'toast-bottom-right'});
     });
   }
+
+  async liquidityRemoved(smartContractAddress) {
+    this.toaster.info('Withdraw in progress!', 'Liquidity', {positionClass: 'toast-bottom-right'});
+    const provider = new providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(
+      smartContractAddress,
+      ScratchAbi.abi,
+      provider
+    );
+    contract.on('LiquidityRemoved', async (quantity, listener) => {
+      this.liquidityChange$.next({smartContractAddress});
+      this.toaster.success('Withdraw confirmed!', 'Liquidity', {positionClass: 'toast-bottom-right'});
+    });
+  }
 }

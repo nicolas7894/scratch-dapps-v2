@@ -13,7 +13,7 @@
                         <h3 class="mb-0">{{ ps.gameName }}</h3>
                     </div>
                     <div class="col-6 text-right">
-                        <a (click)="openRemoveLiquidity(ps.gameAddress)" routerLink="/new-game" class="btn btn-sm btn-success">Remove liquidity</a>
+                        <a (click)="openRemoveLiquidity(ps.tokenAddress)" class="btn btn-sm btn-success">Withdraw</a>
 
                         <a routerLink="/new-game" class="btn btn-sm btn-primary">Add liquididty</a>
                     </div>
@@ -25,13 +25,13 @@
                         <span>Estimated reward : {{ ps.estimatedReward?.toFixed(2) }}</span>
                         <br>
                         <span *ngIf="ps.percentageChange >= 0"class="text-success mr-2">
-                            <i  class="fas fa-arrow-up"></i> 
+                            <i  class="fas fa-arrow-up"></i>
                             {{ ps.percentageChange?.toFixed(2) }}%</span>
                             <span *ngIf="ps.percentageChange < 0" class="text-warning mr-2">
-                                <i  class="fas fa-arrow-down"></i> 
+                                <i  class="fas fa-arrow-down"></i>
                                 {{ ps.percentageChange?.toFixed(2) }}%</span>
 
-                        
+
                     </div>
                 </div>
             </div>

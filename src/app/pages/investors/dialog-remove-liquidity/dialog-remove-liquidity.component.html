@@ -1,1 +1,23 @@
-<p>dialog-remove-liquidity works!</p>
+<h2 mat-dialog-title>How much you want to withdraw ?</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="px-lg-5 py-lg-5">
+        <div>
+          <div class="form-group">
+            <div class="row ">
+              <input [formControl]="amount" type="number" placeholder="0.1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <div class="text-center mb-3">
+    <button [disabled]="disabledButton" (click)="withdraw()" type="button" class="btn btn-primary mt-4">
+      {{ !disabledButton ? 'Withdraw' : 'loading ...'}}
+    </button>
+  </div>
+</mat-dialog-actions>

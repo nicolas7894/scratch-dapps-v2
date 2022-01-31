@@ -17,7 +17,7 @@ Moralis.start({
   providedIn: 'root',
 })
 export class GameService {
-  factoryAddress = '0xBf54D8747009dFDEfB88DD20E919b2e6862Eb3d6';
+  factoryAddress = '0x0f4905aF6B0621149A7901092515F26db7Cb30CB';
   zeroAddress = '0x0000000000000000000000000000000000000000';
   constructor(
     private _eventService: EventService,
@@ -73,10 +73,11 @@ export class GameService {
     const sendOptions = {
       contractAddress: scratcherAddress,
       functionName: 'removeLiquidity',
-      params: { _amount: quantity },
+      params: { _amount: Moralis.Units.ETH(quantity) },
       abi: ScratchAbi.abi,
     };
     await Moralis.executeFunction(sendOptions);
+    await this._eventService.liquidityRemoved(scratcherAddress);
   }
 
   async getTotalSupply(scratcherAddress: string) {
