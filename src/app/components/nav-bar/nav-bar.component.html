@@ -15,10 +15,10 @@
           </ul>
     </div>
   <div style="float:right">
-<!--    <span class="small mr-3">{{ user.get('ethAddress') | address }}</span>-->
-<!--    <button *ngIf="!isLoggedIn" (click)="logIn()" class="btn btn-danger my-2 my-sm-0" >log in</button>-->
-<!--    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-danger my-2 my-sm-0" >-->
-<!--      log out-->
-<!--    </button>-->
+    <span class="small mr-3" *ngIf="user">{{ user.get('ethAddress') | address }}</span>
+    <button *ngIf="!isLoggedIn" (click)="logIn()" class="btn my-2 my-sm-0" style="color:white">Log in</button>
+    <button *ngIf="isLoggedIn" (click)="logOut()" class="btn btn-outline-danger my-2 my-sm-0" >
+      log out
+    </button>
   </div>
 </nav>

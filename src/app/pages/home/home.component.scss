@@ -51,3 +51,24 @@ html {
     opacity: 1;
   }
 }
+
+
+.line-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: white;
+	gap: 16px;
+	white-space: nowrap;
+
+	& > span {
+		color: rgba(255,255,255, 0.8);
+	}
+
+	& > hr {
+		margin-top: unset;
+        margin-bottom: unset;
+		width:100%;
+		background-color: rgba(255,255,255, 0.5);
+	}
+}

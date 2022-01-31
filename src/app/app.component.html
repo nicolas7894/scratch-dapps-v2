@@ -1,2 +1,5 @@
 <nav-bar></nav-bar>
+<div *ngIf="network && network !== '0xa869'" class="alert alert-danger">
+  Warning! you need to be connected on <strong>Avalanche fuji test network</strong>!
+</div>
 <router-outlet></router-outlet>
