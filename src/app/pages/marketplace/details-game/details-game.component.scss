@@ -1,9 +1,9 @@
 .winner-row {
-    background-color: #63FF6F !important;
+    background-color: #34AE3E !important;
     padding: 10px;
 }
 .lose-row {
-    background-color: #FA3800 !important;
+    background-color: #D75E3B !important;
 }
 
 .card {
@@ -12,6 +12,41 @@
   border-radius: 30px;
   z-index:1;
   color: white;
+}
+
+.actions {
+	background: rgba(196, 196, 196, 0.2);
+	padding: 8px 16px;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-radius: 16px;
+	align-items: center;
+	color: white;
+}
+
+.line-info {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	color: white;
+	gap: 16px;
+	white-space: nowrap;
+
+	& > span {
+		color: rgba(255,255,255, 0.8);
+	}
+
+	& > hr {
+		margin-top: unset;
+        margin-bottom: unset;
+		width:100%;
+		background-color: rgba(255,255,255, 0.5);
+	}
+}
+
+h3 {
+color: white;
 }
 
 .title {
@@ -72,4 +107,9 @@ tbody {
 			border-radius: 0 0 0 30px;
 		}
 	}
+}
+
+app-card-game {
+	padding-top: 80px;
+	transform: scale(1.3);
 }

@@ -32,6 +32,7 @@ import {ToastrModule} from 'ngx-toastr';
     AddressPipe
     MarketplaceComponent,
     CardGameComponent,
+    AddressPipe
   ],
   imports: [
     BrowserModule,

@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/models/Game';
 import { GameService } from 'src/app/services/game.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddLiquididtyComponent } from 'src/app/pages/marketplace/details-game/dialog-add-liquididty/dialog-add-liquididty.component';
+import { DialogAddLiquididtyComponent } from 'src/app/pages/details-game/dialog-add-liquididty/dialog-add-liquididty.component';
 import { environment } from 'src/environments/environment';
-import { DialogPlayGameComponent } from 'src/app/pages/marketplace/details-game/dialog-play-game/dialog-play-game.component';
+import { DialogPlayGameComponent } from 'src/app/pages/details-game/dialog-play-game/dialog-play-game.component';
+import {EventService} from "../../services/event.service";
 import {EventService} from "../../services/event.service";
 
 declare var Moralis;
