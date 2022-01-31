@@ -35,8 +35,10 @@ export class DetailsGameComponent implements OnInit {
 
   async ngOnInit() {
     this._eventService.liquidityChange$.subscribe(async (event: { smartContractAddress: string }) => {
-      console.log(event);
-      if (this.gameAddress === event.smartContractAddress) this.liquidity = await this._gameService.getLiquidity(event.smartContractAddress);
+      if (this.gameAddress === event.smartContractAddress) {
+        this.liquidity = await this._gameService.getLiquidity(event.smartContractAddress);
+        await this.getGameTransactions();
+      }
     });
     this.gameAddress = this.route.snapshot.paramMap.get('address');
     await this.getGameTransactions();
