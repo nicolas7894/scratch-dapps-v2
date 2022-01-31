@@ -3,14 +3,14 @@
     <div class="col">
         <div class="row align-items-center">
             <div class="col">
-                <h3 class="mb-3">Your positions</h3>
+                <h3 class="mb-3" style="color:white">Your positions</h3>
             </div>
         </div>
-        <div *ngFor="let ps of positions; let index = index" class="card shadow mb-4">
-            <div class="card-header border-0">
+        <div *ngFor="let ps of positions; let index = index" class="card mb-4">
+            <div class=" border-0">
                 <div class="row align-items-center">
                     <div class="col-6">
-                        <h3 class="mb-0">{{ ps.gameName }}</h3>
+                        <h3 style="color:white" class="mb-0">{{ ps.gameName }}</h3>
                     </div>
                     <div class="col-6 text-right">
                         <a (click)="openRemoveLiquidity(ps.tokenAddress)" class="btn btn-sm btn-success">Withdraw</a>

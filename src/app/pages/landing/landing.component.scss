@@ -1,0 +1,142 @@
+section {
+  height:100vh;
+  width: 100vw;
+  overflow-x: clip;
+}
+
+.container {
+  display: flex;
+  width: 80vw;
+  min-width: 700px;
+  margin: 30px auto 0;
+  background: rgba(196, 196, 196, 0.2);
+  backdrop-filter: blur(16px);
+  border-radius: 87px 87px 0px 0px;
+  padding: 24px;
+  padding-bottom: 160px;
+  flex-direction: column;
+}
+
+
+.lds-circle {
+  display: inline-block;
+  transform: translateZ(1px);
+}
+.lds-circle > div {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  margin: 8px;
+  border-radius: 50%;
+  background: url('../../../assets/img/scratch-coin.svg');
+  animation: lds-circle 3.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+@keyframes lds-circle {
+  0%, 100% {
+    animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
+  }
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(1800deg);
+    animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+  }
+  100% {
+    transform: rotateY(3600deg);
+  }
+}
+
+.title {
+  font-family: Audiowide;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 102px;
+  line-height: 100px;
+  /* or 98% */
+
+  display: flex;
+  align-items: center;
+
+  color: #FFFFFF;
+}
+
+.subtitle {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.align-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.connect {
+  background: linear-gradient(90deg, #E8546A 0%, #50255F 100%);
+  border-radius: 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  height: fit-content;
+
+  .connect-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    /* identical to box height */
+    color: #FFFFFF;
+  }
+}
+
+
+.image-shadow-wrapper {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.image-shadow {
+  position: relative;
+  background: var(--image) no-repeat center;
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  backface-visibility: hidden;
+  background-size: contain;
+
+  &[right] {
+      left: 0.5%;
+  }
+
+  &[left] {
+      right: 0.5%;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 1%;
+    width: 100%;
+    height: 100%;
+    transform: scale(2);
+    transform-origin: center;
+    background: var(--image) no-repeat center;
+    z-index: -1;
+    opacity: .4;
+    filter: blur(100px);
+  }
+}
+
+.card {
+	background-color: unset;
+}
